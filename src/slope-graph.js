@@ -109,17 +109,46 @@ function ready(datapoints) {
     .attr('fill', function(d) {
       return colorScale(d.state)
     })
+    .attr('class', function(d) {
+      // toLowerCase() makes all state lowercase
+      // / /g,'' replace all spaces
+      console.log(d.state.toLowerCase().replace(/ /g, ''))
+      return d.state.toLowerCase().replace(/ /g, '')
+    })
     .on('mouseover', function(d) {
-      d3.select(this)
+      const className = d.state.toLowerCase().replace(/ /g, '')
+      console.log(d.state.toLowerCase().replace(/ /g, ''))
+      d3.selectAll('circle.' + className)
+        .transition()
+        .duration(200)
+        .attr('fill', 'salmon')
+
+      d3.selectAll('path.' + className)
+        .transition()
+        .duration(200)
+        .attr('stroke', 'salmon')
+
+      d3.selectAll('text.' + className)
         .transition()
         .duration(200)
         .attr('fill', 'salmon')
     })
     .on('mouseout', function(d) {
-      console.log(d)
-      d3.select(this)
+      const className = d.state.toLowerCase().replace(/ /g, '')
+      d3.selectAll('circle.' + className)
         .transition()
         .duration(200)
+        .attr('fill', d => colorScale(d.state))
+
+      d3.selectAll('path.' + className)
+        .transition()
+        .duration(200)
+        .attr('stroke', d => colorScale(d.key))
+
+      d3.selectAll('text.' + className)
+        .transition()
+        .duration(200)
+        .attr('fill', '#333333')
     })
 
   var nested = d3
@@ -141,6 +170,46 @@ function ready(datapoints) {
     .attr('fill', 'none')
     .attr('d', function(d) {
       return line(d.values)
+    })
+    .attr('class', function(d) {
+      // toLowerCase() makes all state lowercase
+      // / /g,'' replace all spaces
+      console.log(d.key.toLowerCase().replace(/ /g, ''))
+      return d.key.toLowerCase().replace(/ /g, '')
+    })
+    .on('mouseover', function(d) {
+      const className = d.key.toLowerCase().replace(/ /g, '')
+      d3.selectAll('circle.' + className)
+        .transition()
+        .duration(200)
+        .attr('fill', 'salmon')
+
+      d3.selectAll('path.' + className)
+        .transition()
+        .duration(200)
+        .attr('stroke', 'salmon')
+
+      d3.selectAll('text.' + className)
+        .transition()
+        .duration(200)
+        .attr('fill', 'salmon')
+    })
+    .on('mouseout', function(d) {
+      const className = d.key.toLowerCase().replace(/ /g, '')
+      d3.selectAll('circle.' + className)
+        .transition()
+        .duration(1000)
+        .attr('fill', d => colorScale(d.state))
+
+      d3.selectAll('path.' + className)
+        .transition()
+        .duration(1000)
+        .attr('stroke', d => colorScale(d.key))
+
+      d3.selectAll('text.' + className)
+        .transition()
+        .duration(1000)
+        .attr('fill', '#333333')
     })
 
   svg
@@ -166,6 +235,46 @@ function ready(datapoints) {
         return -12
       }
       return 3
+    })
+    .attr('class', function(d) {
+      // toLowerCase() makes all state lowercase
+      // / /g,'' replace all spaces
+      console.log(d.key.toLowerCase().replace(/ /g, ''))
+      return d.key.toLowerCase().replace(/ /g, '')
+    })
+    .on('mouseover', function(d) {
+      const className = d.key.toLowerCase().replace(/ /g, '')
+      d3.selectAll('circle.' + className)
+        .transition()
+        .duration(200)
+        .attr('fill', 'salmon')
+
+      d3.selectAll('path.' + className)
+        .transition()
+        .duration(200)
+        .attr('stroke', 'salmon')
+
+      d3.selectAll('text.' + className)
+        .transition()
+        .duration(200)
+        .attr('fill', 'salmon')
+    })
+    .on('mouseout', function(d) {
+      const className = d.key.toLowerCase().replace(/ /g, '')
+      d3.selectAll('circle.' + className)
+        .transition()
+        .duration(200)
+        .attr('fill', d => colorScale(d.state))
+
+      d3.selectAll('path.' + className)
+        .transition()
+        .duration(200)
+        .attr('stroke', d => colorScale(d.key))
+
+      d3.selectAll('text.' + className)
+        .transition()
+        .duration(200)
+        .attr('fill', '#333333')
     })
 
   var xAxis = d3.axisBottom(xPositionScale)
