@@ -4,7 +4,7 @@ var margin = { top: 40, left: 50, right: 50, bottom: 40 }
 
 var height = 300 - margin.top - margin.bottom
 
-var width = 600 - margin.left - margin.right
+var width = 570 - margin.left - margin.right
 
 var svg = d3
   .select('#line-chart')
